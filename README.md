@@ -13,16 +13,15 @@ Playwright(Python) 기반으로 다나와 카테고리 페이지의 상품 정�
 
 ```
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\activate
 pip install -r requirements.txt
-python -m playwright install
 ```
 
 ## 실행 예시
 
 ```
 python merged_crawler_final_v2.py ^
-  --category-url "https://prod.danawa.com/list/?cate=16249098" ^
+  --category-url "[링크]" ^
   --output result.csv ^
   --items-per-page 20 ^
   --max-total-items 100 ^
@@ -73,18 +72,11 @@ li.prod_item div.prod_info a.prod_link
 
 ## 문제 해결
 
-### 1. PermissionError: 'result.csv'
-- 파일이 열려 있음 → CSV 파일을 닫고 재실행
-- 경로 쓰기 권한 문제 → 다른 경로 지정 (--output "./output.csv")
-
-### 2. 페이지 복구 무한 루프
+### 1. 페이지 복구 무한 루프
 - 원인: 잘못된 선택자로 '인기 순위'를 상품명으로 인식
-- 해결: 올바른 선택자 적용 (v2에 패치됨)
+- 해결: 올바른 선택자 적용
 
-### 3. 리뷰 행 상세정보 중복 문제
-- 리뷰 행의 상세정보를 ""로 처리하여 해결 (v2 적용)
-
-### 4. 최대 아이템 수 메시지가 두 번 출력
+### 2. 최대 아이템 수 메시지가 두 번 출력
 - break가 product loop만 종료함 → return 사용 권장
 
 ## 사용 팁
